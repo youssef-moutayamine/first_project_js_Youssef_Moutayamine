@@ -20,21 +20,38 @@ let choose = prompt("what do you want : (sign up / log in / change your password
 const signUp = () => {
 
     // & part of name
-    let userName = prompt("Enter your Full Name :").trim()
+    // let userName = prompt("Enter your Full Name :").trim()
 
-    let capitalized = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase()
+    // let capitalized = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase()
 
 
-    while (capitalized.replace(/\s/g, '').length < 5 || /[^a-zA-Z\s]/.test(capitalized)) {
-        capitalized = prompt("Your name is invalid. Must have at least 5 letters and no numbers or special characters. Try again:").trim();
+    // while (capitalized.replace(/\s/g, '').length < 5 || /[^a-zA-Z\s]/.test(capitalized)) {
+    //     capitalized = prompt("Your name is invalid. Must have at least 5 letters and no numbers or special characters. Try again:").trim();
+    // }
+    // capitalized = capitalized.split(' ').map((e) => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()).join(' ')
+
+    //  ^ Email part
+    let email = prompt("Insert a valid email :").trim()
+    let lowerCase = email.toLowerCase()
+
+    while (lowerCase.includes(" ") || email.length < 10 || !email.includes("@") || email.split('@').length !== 2) {
+        lowerCase = prompt("Invalid email. Enter a new email.")
     }
-    capitalized = capitalized.split(' ').map((e) => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()).join(' ')
 
 
 
+    // ^ age part
+    
+    let age = prompt("Enter your age:");
 
+while ( age.trim() !== age || age.includes(" ") || !/^\d+$/.test(age) || age.length === 0 ||age.length > 2 || parseInt(age) === 0   ||
+parseInt(age) < 18            
+) {
+    alert("Invalid age. Please enter a valid number without  letters");
+    age = prompt("Enter your age:");
 }
 
+}
 
 
 
@@ -47,7 +64,10 @@ const logIn = () => {
     // }
 }
 
-
+while (!["sign up", "log in", "change your password"].includes(choose)) {
+    alert("Option doesn't exist");
+    choose = prompt("Enter one of these: (sign up / log in / change your password)")
+}
 switch (choose) {
 
     case "sign up":
@@ -55,11 +75,11 @@ switch (choose) {
         break;
 
     case "log in":
-        // logIn()
         break;
 
     default:
 
-
         break;
 }
+
+
