@@ -31,7 +31,7 @@ const signUp = () => {
     capitalized = capitalized.split(' ').map((e) => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()).join(' ')
 
     //  ^ Email part
-    
+
     let email = prompt("Insert a valid email:").trim();
     let lowerCase = email.toLowerCase();
 
@@ -77,14 +77,40 @@ const signUp = () => {
 
 }
 
+// ? Log in part
+// const logIn = () => {
+//     let email = prompt("Enter your email !")
+//     while (!dataUser.some(e => e.email === email)) {
+//         email = alert("This email does not exist you need to sign up ")
+//         break
+//     }
 
-
+//     while (dataUser.some(e => e.email === email)) {
+//         let pass = prompt("Enter your password to log in :")
+//         while (!dataUser.some(e => e.pass === pass)) {
+//             alert('your password is incorrect try again :')
+//             pass = prompt("Enter your password to log in :")
+//         }
+//     }
+// }
 const logIn = () => {
-    let email = prompt("Enter your email !")
-    // while (email != dataUser.email ) {
-    //     prompt(email)
-    // }
+    let email = prompt("Enter your email:").trim().toLowerCase();
+
+    if (!dataUser.some(e => e.email === email)) {
+        alert("This email does not exist, you need to sign up!");
+        return;
+    }
+
+    let pass = prompt("Enter your password to log in:").trim();
+
+    while (!dataUser.some(e => e.email === email && e.password === pass)) {
+        alert("Your password is incorrect, try again:");
+        pass = prompt("Enter your password to log in:").trim();
+    }
+
+    alert("you logged successfully , welcome back");
 }
+
 
 while (!["sign up", "log in", "change your password"].includes(choose)) {
     alert("Option doesn't exist");
@@ -97,6 +123,7 @@ switch (choose) {
         break;
 
     case "log in":
+        logIn()
         break;
 
     default:
