@@ -1,16 +1,16 @@
 let dataUser = []
 
 class User {
-    constructor(fullname, email, age, password) {
+    constructor(fullname, email, age, password , balance = 0) {
         this.fullname = fullname
         this.email = email
         this.age = age
         this.password = password
-        this.balance = 0
+        this.balance = balance
     }
 }
 
-let ana = new User("youssef moutayamine", "youssef1939@gmail.com", 19, "password123@")
+let ana = new User("youssef moutayamine", "youssef1939@gmail.com", 19, "password123@",100)
 dataUser.push(ana)
 // console.log(dataUser);
 
@@ -106,6 +106,20 @@ while (true) {
             if (suggest === "log out") {
                 alert(`Logging out ${user.fullname}  see you next time!`);
             
+            }
+            switch (suggest) {
+                case "withdraw":
+                    let ask = Number(prompt("How much do you want to withdraw"))
+                    if (ask <= user.balance) {
+                        user.balance -= ask
+                        alert(`Your balance is now ${user.balance}`);
+                    }else{
+                        alert("you don't have this amount to withdraw it")
+                    }
+                    break;
+            
+                default:
+                    break;
             }
         }
     }
