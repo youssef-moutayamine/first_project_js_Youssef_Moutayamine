@@ -14,7 +14,7 @@ dataUser.push(ana)
 console.log(dataUser);
 
 
-let choose = prompt("what do you want : (sign up / log in / change your password )")
+let choose = prompt("what do you want : (sign up / log in / change password )")
 
 // * Sign up part
 const signUp = () => {
@@ -32,32 +32,32 @@ const signUp = () => {
 
     //  ^ Email part
 
-    let email = prompt("Insert a valid email:").trim();
-    let lowerCase = email.toLowerCase();
+    let email = prompt("Insert a valid email:").trim()
+    let lowerCase = email.toLowerCase()
 
     while (
         lowerCase.includes(" ") || lowerCase.length < 10 ||
         !lowerCase.includes("@") || lowerCase.split('@').length !== 2 || dataUser.some(e => e.email === lowerCase)
     ) {
         if (dataUser.some(e => e.email === lowerCase)) {
-            alert("This email already exists.");
+            alert("This email already exists.")
         } else {
-            alert("Invalid email. Try again.");
+            alert("Invalid email. Try again.")
         }
-        email = prompt("Insert a valid email:").trim();
-        lowerCase = email.toLowerCase();
+        email = prompt("Insert a valid email:").trim()
+        lowerCase = email.toLowerCase()
     }
 
 
     // ^ age part
 
-    let age = prompt("Enter your age:");
+    let age = prompt("Enter your age:")
 
     while (age.trim() !== age || age.includes(" ") || !/^\d+$/.test(age) || age.length === 0 || age.length > 2 || parseInt(age) === 0 ||
         parseInt(age) < 18
     ) {
-        alert("Invalid age. Please enter a valid number without  letters");
-        age = prompt("Enter your age:");
+        alert("Invalid age. Please enter a valid number without  letters")
+        age = prompt("Enter your age:")
     }
 
 
@@ -78,21 +78,6 @@ const signUp = () => {
 }
 
 // ? Log in part
-// const logIn = () => {
-//     let email = prompt("Enter your email !")
-//     while (!dataUser.some(e => e.email === email)) {
-//         email = alert("This email does not exist you need to sign up ")
-//         break
-//     }
-
-//     while (dataUser.some(e => e.email === email)) {
-//         let pass = prompt("Enter your password to log in :")
-//         while (!dataUser.some(e => e.pass === pass)) {
-//             alert('your password is incorrect try again :')
-//             pass = prompt("Enter your password to log in :")
-//         }
-//     }
-// }
 const logIn = () => {
     let email = prompt("Enter your email:").trim().toLowerCase();
 
@@ -111,10 +96,39 @@ const logIn = () => {
     alert("you logged successfully , welcome back");
 }
 
+const changePass = () => {
+    let email = prompt('Enter your email:')
 
-while (!["sign up", "log in", "change your password"].includes(choose)) {
+    let user = dataUser.find(user => user.email === email)
+
+    if (!user) {
+        alert("This email does not exist. Please sign up first.")
+        return;
+    }
+
+    let newPass = prompt('Enter your new password:')
+
+    while (!/[@#\-\+\*\/]/.test(newPass) || newPass.length < 7) {
+        newPass = prompt('try another password :')
+    }
+
+    user.password = newPass;
+    let confirm = prompt("confirm your password :")
+    while (confirm != newPass) {
+        confirm = prompt("try again :")
+    }
+
+    alert("Password changed successfully!");
+
+    dataUser.push(dataUser.find(user => user.password === newPass))
+}
+
+
+
+
+while (!["sign up", "log in", "change password"].includes(choose)) {
     alert("Option doesn't exist");
-    choose = prompt("Enter one of these: (sign up / log in / change your password)")
+    choose = prompt("Enter one of these: (sign up / log in / change password)")
 }
 switch (choose) {
 
@@ -126,9 +140,15 @@ switch (choose) {
         logIn()
         break;
 
+    case "change password":
+        changePass()
+        break;
+
     default:
 
         break;
 }
+
+
 
 
