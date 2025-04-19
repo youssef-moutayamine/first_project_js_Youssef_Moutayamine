@@ -1,16 +1,17 @@
 let dataUser = []
 
 class User {
-    constructor(fullname, email, age, password , balance = 0) {
+    constructor(fullname, email, age, password, balance = 0, loan = []) {
         this.fullname = fullname
         this.email = email
         this.age = age
         this.password = password
         this.balance = balance
+        this.loan = []
     }
 }
 
-let ana = new User("youssef moutayamine", "youssef1939@gmail.com", 19, "password123@",100)
+let ana = new User("youssef moutayamine", "youssef1939@gmail.com", 19, "password123@", 100)
 dataUser.push(ana)
 // console.log(dataUser);
 
@@ -101,28 +102,47 @@ while (true) {
         alert(`Welcome back  ${user.fullname}. You have  ${user.balance} in your balance`);
 
         while (true) {
-            let suggest = prompt("We suggest our services: (withdraw / deposit / loan / invest / history) or you can 'log out'").toLowerCase();
+            let suggest = prompt("We suggest our services: (withdraw / deposit / loan / invest / history) or you can 'log out'")
 
             if (suggest === "log out") {
                 alert(`Logging out ${user.fullname}  see you next time!`);
-            
+
             }
             switch (suggest) {
+
                 case "withdraw":
                     let ask = Number(prompt("How much do you want to withdraw"))
                     if (ask <= user.balance) {
                         user.balance -= ask
                         alert(`Your balance is now ${user.balance}`);
-                    }else{
+                    } else {
                         alert("you don't have this amount to withdraw it")
                     }
                     break;
-            
+
+                case "loan":
+                    let askForLoan = Number(prompt("How much do you want to loan"))
+                    let max = user.balance * 0.2
+                    if (askForLoan <= max) {
+                        user.balance += askForLoan
+                        user.loan = askForLoan;
+                        alert("you loan successfully");
+                    }
+                    else {
+                        alert("you can loan just 20%")
+                    }
+                    console.log(user.balance);
+                    
+                    break;
+
+
+
                 default:
                     break;
             }
         }
     }
+
 
 
     // !change the password
