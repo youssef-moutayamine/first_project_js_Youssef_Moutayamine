@@ -106,6 +106,7 @@ while (true) {
 
             if (suggest === "log out") {
                 alert(`Logging out ${user.fullname}  see you next time!`);
+                break ;
 
             }
             switch (suggest) {
@@ -119,6 +120,21 @@ while (true) {
                         alert("you don't have this amount to withdraw it")
                     }
                     break;
+
+                    
+                    case "deposit":
+                        let deposit = Number(prompt("Deposit an amount: (1 - 1000)"));
+                    
+                        while (isNaN(deposit) || deposit < 1 || deposit > 1000) {
+                            alert("Invalid amount! Please deposit between 1 and 1000.");
+                            deposit = Number(prompt("Deposit an amount: (1 - 1000)"));
+                        }
+                    
+                        user.balance += deposit;
+                        alert(`you deposit ${deposit}.`);
+                        alert(`your balance now`${user.balance});
+                        break;
+                        
 
                 case "loan":
                     let askForLoan = Number(prompt("How much do you want to loan"))
@@ -202,7 +218,7 @@ while (true) {
             break;
     }
 
-    let again = prompt("Do you want to do something else? (yes/no)")
+    let again = prompt("Do you want to do something else ? (yes/no)")
     if (again !== "yes") {
         alert("See you soon ")
         break
